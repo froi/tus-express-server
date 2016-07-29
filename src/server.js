@@ -21,21 +21,26 @@ router.all('/files/*', function(req, res) {
     try {
       let uploadOut = server.handle(req, res)
 
-      uploadOut.then((fufillmentValue) => {
-        if(req.method === 'POST') {
-            console.log('Initial Tus POST')
-        } else {
-          console.log(`${req.method} request.`)
-        }
+      if(req.method === 'HEAD') {
+          console.log('Tus HEAD request')
+          console.log(uploadOut)
+      } else {
+        uploadOut.then((fufillmentValue) => {
+          if(req.method === 'POST') {
+              console.log('Initial Tus POST')
+          } else {
+            console.log(`${req.method} request.`)
+          }
 
-        let reqHeaders = JSON.stringify(req.headers)
-        let resHeaders = JSON.stringify(res.headers)
-        console.log(`Request Headers: ${reqHeaders}`)
-        console.log(`Response Headers: ${resHeaders}`)
-      },
-      (rejectReason) => {
-        console.log(`Reject Reason: ${rejectReason}`)
-      });
+          let reqHeaders = JSON.stringify(req.headers)
+          let resHeaders = JSON.stringify(res.headers)
+          console.log(`Request Headers: ${reqHeaders}`)
+          console.log(`Response Headers: ${resHeaders}`)
+        },
+        (rejectReason) => {
+          console.log(`Reject Reason: ${rejectReason}`)
+        });
+      }
       return uploadOut;
     } catch(error) {
       console.log(error)
