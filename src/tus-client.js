@@ -12,7 +12,7 @@ var port = process.env.PORT || '3000'
 var options = {
   endpoint: `http://${host}:${port}/files/`,
   resume: true,
-  chunkSize: size / 2 ,
+  chunkSize: size ,
   metadata: {
     filename: 'testfile.txt'
   },
