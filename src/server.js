@@ -32,17 +32,14 @@ server.datastore = new tus.FileStore({
 })
 
 function tusOutput (tusOutcome, req = undefined, res = undefined, rejected = true) {
-  console.log(`${new Date().toISOString()} : ${req.method} request ${tusOutcome}`)
 
-  if (rejected) {
-    console.log(`${new Date().toISOString()} : POST request ${tusOutcome}`)
-  } else {
-    let reqHeaders = JSON.stringify(req.headers)
-    let resHeaders = JSON.stringify(res.headers)
+  console.log(`Time: ${new Date().toISOString()}`)
+  console.log(`Tus outcome: ${tusOutcome}`)
+  console.log(`Request method: ${req.method}`)
+  console.log(`Response code: ${res.status}`)
+  console.log(`Request Headers: ${reqHeaders}`)
+  console.log(`Response Headers: ${resHeaders}`)
 
-    console.log(`${new Date().toISOString()} : Request Headers: ${reqHeaders}`)
-    console.log(`${new Date().toISOString()} : Response Headers: ${resHeaders}`)
-  }
 }
 
 // route middleware that will happen on every request
