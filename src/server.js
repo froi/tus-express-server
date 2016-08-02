@@ -32,16 +32,16 @@ server.datastore = new tus.FileStore({
 })
 
 function tusOutput (tusOutcome, req = undefined, res = undefined, rejected = true) {
-  console.log(`${req.method} request ${tusOutcome}`)
+  console.log(`${new Date().toISOString()} : ${req.method} request ${tusOutcome}`)
 
   if (rejected) {
-    console.log(`POST request ${tusOutcome}`)
+    console.log(`${new Date().toISOString()} : POST request ${tusOutcome}`)
   } else {
     let reqHeaders = JSON.stringify(req.headers)
     let resHeaders = JSON.stringify(res.headers)
 
-    console.log(`Request Headers: ${reqHeaders}`)
-    console.log(`Response Headers: ${resHeaders}`)
+    console.log(`${new Date().toISOString()} : Request Headers: ${reqHeaders}`)
+    console.log(`${new Date().toISOString()} : Response Headers: ${resHeaders}`)
   }
 }
 
@@ -52,7 +52,7 @@ router.head('/files/*', function (req, res) {
   tusOutput('proccessed', req, res, false)
 })
 router.get('/files/*', function (req, res) {
-  console.log('GET request received. Method not allowed.')
+  console.log(`${new Date().toISOString()} : GET request received. Method not allowed.`)
   res.status(405)
 })
 router.post('/files/*', function (req, res) {
@@ -83,7 +83,7 @@ router.patch('/files/*', function (req, res) {
     })
     return uploadOut
   } catch (error) {
-    console.log('Oh No! A wild exception occurred.')
+    console.log(`${new Date().toISOString()} : Oh No! A wild exception occurred.`)
     console.log(error)
     res.status(500)
   }
@@ -92,5 +92,5 @@ router.patch('/files/*', function (req, res) {
 app.use('/', router)
 
 app.listen(port, host, function () {
-  console.log(`Server started on host: ${host} and port: ${port}`)
+  console.log(`${new Date().toISOString()} : Server started on host: ${host} and port: ${port}`)
 })
