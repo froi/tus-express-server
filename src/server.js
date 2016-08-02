@@ -35,10 +35,11 @@ function tusOutput (tusOutcome, req = undefined, res = undefined, rejected = tru
 
   console.log(`Time: ${new Date().toISOString()}`)
   console.log(`Tus outcome: ${tusOutcome}`)
+  console.log(`Request url: ${req.url}`)
   console.log(`Request method: ${req.method}`)
   console.log(`Response code: ${res.statusCode}`)
-  console.log(`Request Headers: ${reqHeaders}`)
-  console.log(`Response Headers: ${resHeaders}`)
+  console.log(`Request Headers: ${req.headers}`)
+  console.log(`Response Headers: ${res.headers}`)
 
 }
 
@@ -65,10 +66,6 @@ router.post('/files/*', function (req, res) {
   return uploadOut
 })
 router.patch('/files/*', function (req, res) {
-  // log each request to the console
-  console.log(req.method, req.url)
-  console.log(req.headers['upload-metadata'])
-
   try {
     let uploadOut = server.handle(req, res)
 
