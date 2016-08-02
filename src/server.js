@@ -38,8 +38,8 @@ function tusOutput (tusOutcome, req = undefined, res = undefined, rejected = tru
   console.log(`Request url: ${req.url}`)
   console.log(`Request method: ${req.method}`)
   console.log(`Response code: ${res.statusCode}`)
-  console.log(`Request Headers: ${req.headers}`)
-  console.log(`Response Headers: ${res.headers}`)
+  console.log(`Request Headers: ${JSON.stringify(req.headers)}`)
+  console.log(`Response Headers: ${JSON.stringify(res.headers)}`)
 
 }
 
