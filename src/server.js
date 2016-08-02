@@ -36,7 +36,7 @@ function tusOutput (tusOutcome, req = undefined, res = undefined, rejected = tru
   console.log(`Time: ${new Date().toISOString()}`)
   console.log(`Tus outcome: ${tusOutcome}`)
   console.log(`Request method: ${req.method}`)
-  console.log(`Response code: ${res.status}`)
+  console.log(`Response code: ${res.status()}`)
   console.log(`Request Headers: ${reqHeaders}`)
   console.log(`Response Headers: ${resHeaders}`)
 
