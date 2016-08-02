@@ -48,6 +48,8 @@ function tusOutput (tusOutcome, req = undefined, res = undefined, rejected = tru
 // route middleware that will happen on every request
 router.head('/files/*', function (req, res) {
   server.handle(req, res)
+
+  tusOutput('proccessed', req, res, false)
 })
 router.get('/files/*', function (req, res) {
   console.log('GET request received. Method not allowed.')
