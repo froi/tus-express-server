@@ -1,28 +1,31 @@
 {
-  "name": "tus-poc",
-  "version": "0.0.1",
+  "name": "tus-express-server",
+  "version": "1.0.0",
   "description": "A simple POC of the Tus.io middleware in an Express.js app",
-  "main": "server/app.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "istanbul cover node_modules/mocha/bin/_mocha src/tests/tus-obj-spec.js && codecov"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/killerrabbitlabs/tus-poc.git"
+    "url": "git+git@github.com:froi/tus-express-server.git"
   },
   "keywords": [
     "tus",
-    "campodata",
     "files"
   ],
   "author": "Froilan Irizarry",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/killerrabbitlabs/tus-poc#readme",
+  "homepage": "https://github.com/froi/tus-express-server",
   "devDependencies": {
+    "chai": "^3.5.0",
+    "codecov": "^1.0.1",
     "eslint": "^3.1.1",
     "eslint-config-standard": "^5.3.5",
     "eslint-plugin-promise": "^2.0.0",
-    "eslint-plugin-standard": "^2.0.0"
+    "eslint-plugin-standard": "^2.0.0",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0.0"
   },
   "dependencies": {
     "express": "^4.14.0",

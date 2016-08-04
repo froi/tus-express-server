@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '6.1'
+- '6.3'
+install:
+  - npm install -g codecov
+  - npm install --dev
+script:
+  - npm test
+  - istanbul cover ./node_modules/mocha/bin/_mocha src/tests/ts-obj-spec.js --report lcovonly -- -R spec
+  - codecov
+after_success:
+- bash <(curl -s https://codecov.io/bash)

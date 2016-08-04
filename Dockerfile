@@ -33,7 +33,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 
 # This is to cache the node_modules unleass the package.json changes see http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
 ADD package.json /tmp/package.json
-RUN cd /tmp && npm install
+RUN cd /tmp && npm install --production
 RUN mkdir -p /src/files && cp -a /tmp/node_modules /src
 
 WORKDIR /src
