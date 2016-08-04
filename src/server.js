@@ -1,90 +1,56 @@
-const tus = require('tus-node-server')
-const server = new tus.Server()
-const express = require('express')
+'use strict';
 
-var app = express()
-var router = express.Router()
-var host = process.env.HOST || '0.0.0.0'
-var port = process.env.PORT || 3000
+const TusObj = require('./tus');
+const server = TusObj.createTusServerObj();
 
-server.datastore = new tus.FileStore({
-  path: '/files',
-  namingFunction: (req) => {
-    let uploadMetadata = req.headers['upload-metadata']
-    let fileName = `campodata-upload-${new Date().toISOString()}`
-    if (uploadMetadata) {
-      let splitMetadata = uploadMetadata.split(',')
+const express = require('express');
+var app = express();
+var router = express.Router();
+var host = process.env.HOST || '0.0.0.0';
+var port = process.env.PORT || 3000;
 
-      splitMetadata.forEach((item) => {
-        if (item.match(/^filename/i)) {
-          let itemArr = item.split(' ')
-
-          if (itemArr && itemArr.length > 1) {
-            let buff = Buffer.from(itemArr[1], 'base64')
-            fileName = buff.toString()
-          }
-        }
-      })
-    }
-
-    return fileName
-  }
-})
-
-function tusOutput (tusOutcome, req = undefined, res = undefined, rejected = true) {
-
-  console.log(`Time: ${new Date().toISOString()}`)
-  console.log(`Tus outcome: ${tusOutcome}`)
-  console.log(`Request url: ${req.url}`)
-  console.log(`Request method: ${req.method}`)
-  console.log(`Response code: ${res.statusCode}`)
-  console.log(`Request Headers: ${JSON.stringify(req.headers)}`)
-  console.log(`Response Headers: ${JSON.stringify(res.headers)}`)
-
-}
+server.datastore = TusObj.createTusFileStore('/files');
 
 // route middleware that will happen on every request
 router.head('/files/*', function (req, res) {
-  server.handle(req, res)
-
-  tusOutput('proccessed', req, res, false)
+  server.handle(req, res);
+  TusObj.consoleOutput('proccessed', req, res, false);
 })
 router.get('/files/*', function (req, res) {
-  console.log(`${new Date().toISOString()} : GET request received. Method not allowed.`)
-  res.status(405)
+  res.status(405);
 })
 router.post('/files/*', function (req, res) {
-  let uploadOut = server.handle(req, res)
+  let uploadOut = server.handle(req, res);
 
   uploadOut.then((fufillmentValue) => {
-    tusOutput(`fufilled: ${fufillmentValue}`, req, res, false)
+    TusObj.consoleOutput(`fufilled: ${fufillmentValue}`, req, res, false);
   },
   (rejectReason) => {
-    tusOutput(`rejected: ${rejectReason}`)
+    TusObj.consoleOutput(`rejected: ${rejectReason}`);
   })
 
-  return uploadOut
+  return uploadOut;
 })
 router.patch('/files/*', function (req, res) {
   try {
-    let uploadOut = server.handle(req, res)
+    let uploadOut = server.handle(req, res);
 
     uploadOut.then((fufillmentValue) => {
-      tusOutput(`fufilled: ${fufillmentValue}`, req, res, false)
+      TusObj.consoleOutput(`fufilled: ${fufillmentValue}`, req, res, false);
     },
-    (rejectReason) => {
-      tusOutput(`rejected: ${rejectReason}`)
+    (rejeconsoleOutputon) => {
+      TusObj.consoleOutput(`rejected: ${rejectReason}`);
     })
-    return uploadOut
+    return uploadOut;
   } catch (error) {
-    console.log(`${new Date().toISOString()} : Oh No! A wild exception occurred.`)
-    console.log(error)
-    res.status(500)
+    console.log(`${new Date().toISOString()} : Oh No! A wild exception occurred.`);
+    console.log(error);
+    res.status(500);
   }
 })
 
-app.use('/', router)
+app.use('/', router);
 
 app.listen(port, host, function () {
-  console.log(`${new Date().toISOString()} : Server started on host: ${host} and port: ${port}`)
+  console.log(`${new Date().toISOString()} : Server started on host: ${host} and port: ${port}`);
 })
