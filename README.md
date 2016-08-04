@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/froi/tus-express-server.svg?branch=v1.0)](https://travis-ci.org/froi/tus-express-server) [![codecov](https://codecov.io/gh/froi/tus-express-server/branch/master/graph/badge.svg)](https://codecov.io/gh/froi/tus-express-server)
+
+
 # TUS.io POC
 
 This project was primarily made as a proof of concept for the use of Tus.io as a middleware component in an Express.js app.
