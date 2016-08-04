@@ -1,23 +1,22 @@
 {
-  "name": "tus-poc",
-  "version": "0.0.1",
+  "name": "tus-express-server",
+  "version": "1.0.0",
   "description": "A simple POC of the Tus.io middleware in an Express.js app",
-  "main": "server/app.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://bitbucket.org/killerrabbitlabs/tus-poc.git"
+    "url": "git+git@github.com:froi/tus-express-server.git"
   },
   "keywords": [
     "tus",
-    "campodata",
     "files"
   ],
   "author": "Froilan Irizarry",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/killerrabbitlabs/tus-poc#readme",
+  "homepage": "https://github.com/froi/tus-express-server",
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint": "^3.1.1",
