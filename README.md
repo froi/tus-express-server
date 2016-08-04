@@ -42,6 +42,12 @@ $> npm install --production
 From the root directory run:
 
 ```
+$> npm test
+```
+
+or directly use mocha:
+
+```
 $> mocha src/test/tus-obj-spec.js
 ```
 

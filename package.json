@@ -4,7 +4,7 @@
   "description": "A simple POC of the Tus.io middleware in an Express.js app",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha src/tests/tus-obj-spec.js"
   },
   "repository": {
     "type": "git",
